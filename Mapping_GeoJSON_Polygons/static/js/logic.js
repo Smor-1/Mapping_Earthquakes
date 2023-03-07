@@ -31,25 +31,13 @@ let map = L.map('mapid', {
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
-
-
-let torontoRoutes = "https://raw.githubusercontent.com/Smor-1/Mapping_Earthquakes/main/Mapping_GeoJSON_Lines/torontoRoutes.json"
-
-// Create a style for the lines.
-let myStyle = {
-    color: "red",
-    weight: 2
-};
+let torontoHood = "https://raw.githubusercontent.com/Smor-1/Mapping_Earthquakes/main/Mapping_GeoJSON_Polygons/torontoNeighborhoods.json"
 
 // Grabbing our GeoJSON data.
-d3.json(torontoRoutes).then(function(data) {
+d3.json(torontoHood).then(function(data) {
     console.log(data);
   // Creating a GeoJSON layer with the retrieved data.
-  L.geoJSON(data, {
-    style: myStyle,
-    onEachFeature: function(feature, layer) {
-        layer.bindPopup("<h3> Airline: " + feature.properties.airline + "</h3> <hr><h3> Destination: " + feature.properties.dst + "</h3>")
-    }
-  }).addTo(map);
+  L.geoJSON(data)
+  .addTo(map);
 });
 
